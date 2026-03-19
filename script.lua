@@ -21,19 +21,16 @@ local function createESP(obj)
     if not obj or not obj:FindFirstChild("HumanoidRootPart") then return end
     if obj:FindFirstChild("ESP_Added") then return end
 
-    -- tag biar ga double
     local tag = Instance.new("BoolValue")
     tag.Name = "ESP_Added"
     tag.Parent = obj
 
-    -- 🔲 Highlight putih
     local highlight = Instance.new("Highlight")
     highlight.FillColor = Color3.fromRGB(255,255,255)
     highlight.OutlineColor = Color3.fromRGB(255,255,255)
     highlight.FillTransparency = 0.5
     highlight.Parent = obj
 
-    -- 🏷️ Billboard GUI (Nama + Jarak)
     local billboard = Instance.new("BillboardGui")
     billboard.Size = UDim2.new(0,200,0,50)
     billboard.AlwaysOnTop = true
@@ -49,9 +46,13 @@ local function createESP(obj)
     text.Font = Enum.Font.SourceSansBold
     text.Parent = billboard
 
-    -- 🔄 Update jarak realtime
-    runService.RenderStepped:Connect(function()
-        if obj and obj.Parent and localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
+    local connection
+    connection = runService.RenderStepped:Connect(function()
+        if not obj or not obj.Parent then
+            connection:Disconnect()
+            return
+        end
+        if localPlayer.Character and localPlayer.Character:FindFirstChild("HumanoidRootPart") then
             local dist = (localPlayer.Character.HumanoidRootPart.Position - obj.HumanoidRootPart.Position).Magnitude
             text.Text = obj.Name .. " [" .. math.floor(dist) .. " Stud]"
         end
@@ -71,10 +72,10 @@ local function detect(child)
         alert("🐙 Kraken Galleon Boss SPAWN!")
         createESP(child)
     elseif child.Name == "Shark Galleon Boss" then
-        alert("🦈 Shark Galleon Boss SPAWN!")
+        alert("🦈 Shark Galleon Boss SPAWN! (SeaMonster)")
         createESP(child)
     elseif child.Name == "Ghost Galleon Boss" then
-        alert("👻 Ghost Galleon Boss SPAWN!")
+        alert("👻 Ghost Galleon Boss SPAWN! (SeaMonster)")
         createESP(child)
     elseif string.find(child.Name, "SeaDragon") then
         alert("🐉 SeaDragon SPAWN!")
@@ -99,6 +100,9 @@ local function detect(child)
         createESP(child)
     elseif child.Name == "SeaKing Island" then
         alert("🐟 SeaKing Island SPAWN!")
+        createESP(child)
+    elseif child.Name == "Gale Island" then
+        alert("🌪️ Gale Island SPAWN!")
         createESP(child)
     end
 
