@@ -40,6 +40,13 @@ local function detectShark(child)
     end
 end
 
+-- 🔍 DETECT GHOST GALLEON (SeaMonster)
+local function detectGhost(child)
+    if child.Name == "Ghost Galleon Boss" then
+        alert("👻 Ghost Galleon Boss SPAWN! (SeaMonster)")
+    end
+end
+
 -- 🔍 DETECT SEAKING ISLAND (Island)
 local function detectSeaKing(child)
     if child.Name == "SeaKing Island" then
@@ -102,6 +109,7 @@ for _,v in pairs(seaFolder:GetChildren()) do
     detectGalleon(v)
     detectKraken(v)
     detectShark(v)        -- Shark Galleon Boss di SeaMonster
+    detectGhost(v)        -- Ghost Galleon Boss di SeaMonster
     detectSeaDragon(v)
     detectCrab(v)
 end
@@ -123,7 +131,8 @@ seaFolder.ChildAdded:Connect(function(child)
     detectWhale(child)
     detectGalleon(child)
     detectKraken(child)
-    detectShark(child)    -- Shark Galleon Boss di SeaMonster
+    detectShark(child)    -- Shark Galleon Boss
+    detectGhost(child)    -- Ghost Galleon Boss
     detectSeaDragon(child)
     detectCrab(child)
 end)
@@ -133,7 +142,7 @@ islandFolder.ChildAdded:Connect(function(child)
     detectAngel(child)
     detectAnimal(child)
     detectFish(child)
-    detectSeaKing(child)  -- SeaKing Island di Island
+    detectSeaKing(child)  -- SeaKing Island
 end)
 
 bossFolder.ChildAdded:Connect(function(child)
