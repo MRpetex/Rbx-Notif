@@ -16,7 +16,7 @@ local function alert(msg)
     print("===========================")
 end
 
--- 👁️ ESP FUNCTION
+-- 👁️ ESP (TANPA HIGHLIGHT)
 local function createESP(obj)
     if not obj or not obj:FindFirstChild("HumanoidRootPart") then return end
     if obj:FindFirstChild("ESP_Added") then return end
@@ -25,12 +25,7 @@ local function createESP(obj)
     tag.Name = "ESP_Added"
     tag.Parent = obj
 
-    local highlight = Instance.new("Highlight")
-    highlight.FillColor = Color3.fromRGB(255,255,255)
-    highlight.OutlineColor = Color3.fromRGB(255,255,255)
-    highlight.FillTransparency = 0.5
-    highlight.Parent = obj
-
+    -- 🏷️ Billboard GUI (Nama + Jarak)
     local billboard = Instance.new("BillboardGui")
     billboard.Size = UDim2.new(0,200,0,50)
     billboard.AlwaysOnTop = true
@@ -59,7 +54,7 @@ local function createESP(obj)
     end)
 end
 
--- 🔍 DETECTION FUNCTION UMUM
+-- 🔍 DETECTION FUNCTION
 local function detect(child)
     -- SEA MONSTER
     if child.Name == "Whale Galleon Boss" then
@@ -72,10 +67,10 @@ local function detect(child)
         alert("🐙 Kraken Galleon Boss SPAWN!")
         createESP(child)
     elseif child.Name == "Shark Galleon Boss" then
-        alert("🦈 Shark Galleon Boss SPAWN! (SeaMonster)")
+        alert("🦈 Shark Galleon Boss SPAWN!")
         createESP(child)
     elseif child.Name == "Ghost Galleon Boss" then
-        alert("👻 Ghost Galleon Boss SPAWN! (SeaMonster)")
+        alert("👻 Ghost Galleon Boss SPAWN!")
         createESP(child)
     elseif string.find(child.Name, "SeaDragon") then
         alert("🐉 SeaDragon SPAWN!")
