@@ -68,6 +68,13 @@ local function detectAnimal(child)
     end
 end
 
+-- 🔍 DETECT FISH
+local function detectFish(child)
+    if child.Name == "Fish Island" then
+        alert("🐟 Fish Island SPAWN!")
+    end
+end
+
 -- 🔍 DETECT SABER
 local function detectSaber(child)
     if child.Name == "Lord of Saber [Lv. 8500]" then
@@ -88,6 +95,7 @@ for _,v in pairs(islandFolder:GetChildren()) do
     detectDemon(v)
     detectAngel(v)
     detectAnimal(v)
+    detectFish(v) -- TAMBAH INI
 end
 
 for _,v in pairs(bossFolder:GetChildren()) do
@@ -107,6 +115,7 @@ islandFolder.ChildAdded:Connect(function(child)
     detectDemon(child)
     detectAngel(child)
     detectAnimal(child)
+    detectFish(child) -- TAMBAH INI
 end)
 
 bossFolder.ChildAdded:Connect(function(child)
